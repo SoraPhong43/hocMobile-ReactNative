@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Alert, Button, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, FlatList, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 
 
@@ -42,7 +42,7 @@ export default function App() {
 
       <Button title='add' color={"green"}
         onPress={() => alert("tap")} />
-      <ScrollView style={{ marginTop: 20, borderColor: 'red', borderWidth: 1 }}>
+      {/* <ScrollView style={{ marginTop: 20, borderColor: 'red', borderWidth: 1 }}>
         {todoList.map(todo => {
           return (
             <Text
@@ -52,7 +52,26 @@ export default function App() {
             </Text>
           )
         })}
-      </ScrollView>
+      </ScrollView> */}
+
+      <FlatList
+        style={{
+          marginTop: 20,
+          borderColor: "red",
+          borderWidth: 1
+        }}
+        data={todoList}
+        renderItem={({ item }) => {
+          return (
+            <Text
+              key={item.id}
+              style={styles.todo}>
+              {item.title}
+            </Text>
+          )
+        }}
+      />
+
       {/* <StatusBar style="auto" /> */}
     </View>
   );
