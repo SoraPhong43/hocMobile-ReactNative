@@ -18,7 +18,7 @@ const ListTodo = (props: IProps) => {
 
     return (
         <>
-            <Text>{JSON.stringify(todoList)}</Text>
+            {/* <Text>{JSON.stringify(todoList)}</Text> */}
             <FlatList
                 style={{
                     marginTop: 20,
