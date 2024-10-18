@@ -29,7 +29,10 @@ const MineButton = (props: IProps) => {
     return (
         <>
             <Pressable
-                style={({ pressed }) => ({ opacity: pressed === true ? 0.5 : 1 })}
+                style={({ pressed }) => ({
+                    opacity: pressed === true ? 0.5 : 1,
+                    alignSelf: "flex-start",
+                })}
                 onPress={onPress}
 
 
