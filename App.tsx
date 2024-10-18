@@ -10,104 +10,67 @@ import 'react-native-gesture-handler';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Home from './components/learn/home';
+import HomeDetails from './components/learn/home.details';
+import Like from './components/learn/like';
+import LikeDetails from './components/learn/like.details';
+import About from './components/learn/About';
+import ChangePassword from './components/learn/Change.Password';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-
-  function HomeScreen(props: any) {
-    // console.log("check props:", props)
-    const navigation = props.navigation;
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <View style={{ marginVertical: 10 }}>
-          <Button
-            title='Go to details'
-            onPress={() => navigation.navigate("Details")} />
-        </View>
-        <View style={{ marginVertical: 10 }}>
-          <Button
-            title='Go user id = 1'
-            onPress={() => navigation.navigate("Details",
-              { userId: 1, name: "Eric" }
-            )} />
-        </View>
-        <View style={{ marginVertical: 10 }}>
-          <Button
-            title='Go user id = 2'
-            onPress={() => navigation.navigate("Details",
-              { userId: 2, name: "Hoi dan it" }
-            )} />
-        </View>
-      </View>
-    );
-  }
-
-  function DetailsScreen(props: any) {
-    const route: any = useRoute();
-    const navigation: any = useNavigation();
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Text>user id = {route?.params?.userId}</Text>
-        <Button
-          title='Go back home'
-          onPress={() => navigation.goBack()} />
-      </View>
-    );
-  }
   const Drawer = createDrawerNavigator();
   const Tab = createBottomTabNavigator();
-  return (
-    // <TouchableWithoutFeedback
-    //   onPress={() => Keyboard.dismiss()}>
-    //   <View style={styles.container}>
-    //     <InputTodo
-    //       addTodo={addTodo}
-    //     />
-    //     <ListTodo
-    //       todoList={todoList}
-    //       deleteTodo={deleteTodo}
-    //     />
-    //   </View>
-    // </TouchableWithoutFeedback>
 
-    <NavigationContainer>
-      {/* <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#f4511e',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold'
-          }
-        }}
+  const TabApp = () => {
+    return (
+      < Tab.Navigator
       >
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Like" component={Like} />
+      </Tab.Navigator >
+    )
+  }
 
+  const StackApp = () => {
+    return (
+      <Stack.Navigator>
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerTitle: 'Trang chu' }} />
+          name="TabApp"
+          component={TabApp}
+          options={{ headerTitle: 'Trang chu', headerShown: false }} />
         <Stack.Screen
-          name="Details"
-          component={DetailsScreen}
+          name="HomeDetails"
+          component={HomeDetails}
           options={({ route }: { route: any }) => ({
             headerTitle: `Xem chi tiet ${route?.params?.userId ?? ""}`,
           })} />
-      </Stack.Navigator> */}
+        <Stack.Screen
+          name="LikeDetails"
+          component={LikeDetails}
+          options={({ route }: { route: any }) => ({
+            headerTitle: `Xem chi tiet ${route?.params?.userId ?? ""}`,
+          })} />
+      </Stack.Navigator>
+    )
+  }
 
-      {/* <Drawer.Navigator>
+  return (
+    <NavigationContainer>
+
+      <Drawer.Navigator>
         <Drawer.Screen
-          options={{
-            drawerLabel: "trang chu"
-          }}
-          name="Feed"
-          component={HomeScreen} />
-        <Drawer.Screen name="Article" component={DetailsScreen} />
-      </Drawer.Navigator> */}
+          name="StackApp"
+          component={StackApp} />
+        <Drawer.Screen
+          name="About"
+          component={About} />
+        <Drawer.Screen
+          name="Change Password"
+          component={ChangePassword} />
+      </Drawer.Navigator>
 
-      <Tab.Navigator
+      {/* <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -129,9 +92,9 @@ export default function App() {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={DetailsScreen} />
-      </Tab.Navigator>
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Settings" component={HomeDetails} />
+      </Tab.Navigator> */}
 
     </NavigationContainer>
     // <Flexbox />
