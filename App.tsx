@@ -6,6 +6,8 @@ import {
 } from 'react-native';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import 'react-native-gesture-handler';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -52,6 +54,7 @@ export default function App() {
       </View>
     );
   }
+  const Drawer = createDrawerNavigator();
 
   return (
     // <TouchableWithoutFeedback
@@ -66,8 +69,9 @@ export default function App() {
     //     />
     //   </View>
     // </TouchableWithoutFeedback>
+
     <NavigationContainer>
-      <Stack.Navigator
+      {/* <Stack.Navigator
         screenOptions={{
           headerStyle: {
             backgroundColor: '#f4511e',
@@ -89,7 +93,18 @@ export default function App() {
           options={({ route }: { route: any }) => ({
             headerTitle: `Xem chi tiet ${route?.params?.userId ?? ""}`,
           })} />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
+
+      <Drawer.Navigator>
+        <Drawer.Screen
+          options={{
+            drawerLabel: "trang chu"
+          }}
+          name="Feed"
+          component={HomeScreen} />
+        <Drawer.Screen name="Article" component={DetailsScreen} />
+      </Drawer.Navigator>
+
     </NavigationContainer>
     // <Flexbox />
   );
